@@ -1,17 +1,56 @@
-void setupOrbits(List<Orb> orbs, Set<PhysicsToggles> physicsToggles, Map<PhysicsConstants, Float> physicsConstants) {
-	orbs.clear();
-	physicsToggles.clear();
+class OrbitsScene extends Scene {
+	OrbitsScene() {
+		super();
 
-	physicsToggles.add(PhysicsToggles.MOVEMENT);
-	physicsToggles.add(PhysicsToggles.GRAVITY);
-	physicsToggles.add(PhysicsToggles.COLLISIONS);
+		physicsToggles.add(PhysicsToggle.GRAVITY);
+		physicsToggles.add(PhysicsToggle.COLLISIONS);
 
-	physicsConstants.put(PhysicsConstants.GRAVITATIONAL_CONSTANT, 0.05);
+		physicsConstants.put(PhysicsConstant.GRAVITATIONAL_CONSTANT, 0.002);
+		
+		Orb centralBody1 = new Orb(new PVector(width / 2 - 70, height / 2), 1000000000, 50, color(255, 0, 0));
+		Orb centralBody2 = new Orb(new PVector(width / 2 + 70, height / 2), 1000000000, 50, color(255, 0, 0));
+		centralBody1.vel.set(0, 83);
+		centralBody2.vel.set(0, -83);
 
-	Orb centralBody = new Orb(new PVector(width / 2, height / 2), 999999999, 70, color(255, 0, 0));
-	Orb planet1 = new Orb(new PVector(width / 2 + 200, height / 2), 10, 30, color(25, 0, 0));
-	planet1.vel.set(0, -600);
+		Orb planet1 = new Orb(new PVector(width / 2 + 400, height / 2), 0.1, 10, color(255));
+		planet1.vel.set(0, -100);
 
-	orbs.add(centralBody);
-	orbs.add(planet1);
+		orbs.add(centralBody1);
+		orbs.add(centralBody2);
+		orbs.add(planet1);
+	}
+
+	void draw() {
+		background(0);
+		drawOrbs();
+	}
+}
+
+class SpringsScene extends Scene {
+	SpringsScene() {
+		super();
+
+		physicsToggles.add(PhysicsToggle.SPRING);
+		physicsToggles.add(PhysicsToggle.WALL_BOUNCE);
+		physicsToggles.add(PhysicsToggle.COLLISIONS);
+
+		physicsConstants.put(PhysicsConstant.SPRING_CONSTANT, 0.002);
+		
+		Orb centralBody1 = new Orb(new PVector(width / 2 - 70, height / 2), 1000000000, 50, color(255, 0, 0));
+		Orb centralBody2 = new Orb(new PVector(width / 2 + 70, height / 2), 1000000000, 50, color(255, 0, 0));
+		centralBody1.vel.set(0, 83);
+		centralBody2.vel.set(0, -83);
+
+		Orb planet1 = new Orb(new PVector(width / 2 + 400, height / 2), 0.1, 10, color(255));
+		planet1.vel.set(0, -100);
+
+		orbs.add(centralBody1);
+		orbs.add(centralBody2);
+		orbs.add(planet1);
+	}
+
+	void draw() {
+		background(0);
+		drawOrbs();
+	}
 }

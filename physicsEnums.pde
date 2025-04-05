@@ -1,5 +1,4 @@
-enum PhysicsToggles {
-	MOVEMENT,
+enum PhysicsToggle {
 	WALL_BOUNCE,
 	GRAVITY,
 	DRAG,
@@ -7,8 +6,13 @@ enum PhysicsToggles {
 	COLLISIONS,
 }
 
-enum PhysicsConstants {
+enum PhysicsConstant {
 	GRAVITATIONAL_CONSTANT,
 	SPRING_CONSTANT,
 	DRAG_COEFFICIENT,
+}
+
+enum SimulationParam {
+	PHYSICS_STEPS_PER_SECOND,
+	BACKGROUND,
 }

@@ -2,7 +2,6 @@ class Orb {
 	PVector pos, vel, acc;
 	float mass, radius;
 	color fillColor;
-	ArrayList<Orb> springLinks;
 
 	Orb(PVector pos, float mass, float radius, color fillColor) {
 		this.pos = pos;
@@ -11,7 +10,6 @@ class Orb {
 		this.mass = mass;
 		this.radius = radius;
 		this.fillColor = fillColor;
-		this.springLinks = new ArrayList<>();
 	}
 
 	void applyForce(PVector force) {
