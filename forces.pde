@@ -15,6 +15,10 @@ void wallBounceOrb(Orb orb) {
 	}
 }
 
+PVector getDownwardGravityForce(float acceleration, Orb orb) {
+	return new PVector(0, orb.mass * acceleration);
+}
+
 PVector getGravityForce(float gravitationalConstant, Orb orb, List<Orb> orbs) {
 	PVector sumForce = new PVector();
 	for (Orb otherOrb : orbs) {
@@ -26,10 +30,8 @@ PVector getGravityForce(float gravitationalConstant, Orb orb, List<Orb> orbs) {
 }
 
 PVector getSpringForce(float springConstant, float springLength, LinkedListOrb orb) {
-	float distanceToPrevious = orb.previous != null ? orb.previous.pos.dist(orb.pos) : null;
-	float distanceToNext = orb.next != null ? orb.next.pos.dist(orb.pos) : null;
 	return (
-		(distanceToPrevious != 0 ? orb.previous.pos.copy().sub(orb.pos).setMag(distanceToPrevious - springLength) : new PVector())
-		.add(distanceToNext != 0 ? orb.next.pos.copy().sub(orb.pos).setMag(distanceToNext - springLength) : new PVector())
+		(orb.previous != null ? orb.previous.pos.copy().sub(orb.pos).setMag(orb.previous.pos.dist(orb.pos) - springLength).mult(springConstant) : new PVector())
+		.add(orb.next != null ? orb.next.pos.copy().sub(orb.pos).setMag(orb.next.pos.dist(orb.pos) - springLength).mult(springConstant) : new PVector())
 	);
 }

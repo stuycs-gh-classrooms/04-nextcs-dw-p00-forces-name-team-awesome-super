@@ -7,7 +7,7 @@ import java.util.stream.*;
 
 int resx = 1920, resy = 1080;
 int physicsTicksPerSecond = 500;
-float timeScale = 2.0;
+float timeScale = 1.0;
 boolean paused = false;
 
 void settings() {
@@ -40,7 +40,7 @@ void drawInterface() {
 	boolean[] state = {
 		!paused,
 		activeScene.physicsToggles.contains(PhysicsToggle.WALL_BOUNCE),
-		activeScene.physicsToggles.contains(PhysicsToggle.GRAVITY),
+		activeScene.physicsToggles.contains(PhysicsToggle.GRAVITY) || activeScene.physicsToggles.contains(PhysicsToggle.DOWNWARD_GRAVITY),
 		activeScene.physicsToggles.contains(PhysicsToggle.DRAG),
 		activeScene.physicsToggles.contains(PhysicsToggle.SPRING),
 		activeScene.physicsToggles.contains(PhysicsToggle.COLLISIONS),
@@ -73,7 +73,10 @@ void drawInterface() {
 
 void keyPressed() {
 	if (key == '1') activeScene = new OrbitsScene();
+	if (key == '2') activeScene = new SpringsScene();
 	if (key == ' ') paused = !paused;
+	// if (key == 'b') activeScene.physicsToggles.contains(PhysicsToggle.WALL_BOUNCE) ? activeScene.physicsToggles.remove(PhysicsToggle.WALL_BOUNCE) : activeScene.physicsToggles.add(PhysicsToggle.WALL_BOUNCE);
+	if (key == 'b') if (activeScene.physicsToggles.contains(PhysicsToggle.WALL_BOUNCE)) activeScene.physicsToggles.remove(PhysicsToggle.WALL_BOUNCE); else activeScene.physicsToggles.add(PhysicsToggle.WALL_BOUNCE);
 	if (keyCode == UP) timeScale += 0.2;
 	if (keyCode == DOWN) timeScale -= 0.2;
 }

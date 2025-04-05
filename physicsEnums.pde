@@ -1,18 +1,16 @@
 enum PhysicsToggle {
 	WALL_BOUNCE,
 	GRAVITY,
+	DOWNWARD_GRAVITY, // for convenience
 	DRAG,
 	SPRING,
 	COLLISIONS,
 }
 
-enum PhysicsConstant {
-	GRAVITATIONAL_CONSTANT,
-	SPRING_CONSTANT,
+enum SimulationConstant {
+	GRAVITATIONAL_CONSTANT, // G
+	GRAVITATIONAL_ACCELERATION, // "g", for downward gravity
+	SPRING_CONSTANT, // k
+	SPRING_LENGTH,
 	DRAG_COEFFICIENT,
-}
-
-enum SimulationParam {
-	PHYSICS_STEPS_PER_SECOND,
-	BACKGROUND,
 }

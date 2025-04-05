@@ -1,6 +1,7 @@
 class Orb {
 	PVector pos, vel, acc;
 	float mass, radius;
+	boolean fixed;
 	color fillColor;
 
 	Orb(PVector pos, float mass, float radius, color fillColor) {
@@ -9,6 +10,7 @@ class Orb {
 		this.acc = new PVector();
 		this.mass = mass;
 		this.radius = radius;
+		this.fixed = false;
 		this.fillColor = fillColor;
 	}
 
@@ -22,6 +24,7 @@ class Orb {
 	}
 
 	void applyVelocity(float delta) {
+		if (fixed) return;
 		pos.add(vel.copy().mult(delta));
 	}
 

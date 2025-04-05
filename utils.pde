@@ -4,3 +4,9 @@ void linkOrbs(LinkedListOrb... orbs) {
 		orbs[i].previous = orbs[i - 1];
 	}
 }
+
+void addOrbs(List<Orb> orbList, Orb... orbs) {
+	for (Orb orb : orbs) {
+		orbList.add(orb);
+	}
+}
