@@ -27,47 +27,58 @@ All projects will require the following:
 ### Forumla
 What is the formula for your force? Including descriptions/definitions for the symbols. You may include a picture of the formula if it is not easily typed.
 
-calculate velocities via momentum and KE (todo: figure out how to do that)
-then reflect velocity over angle to other and flip
+$
+\begin{align}
+v'_{1x} &= \frac{v_{1}\cos(\theta_1-\varphi)(m_1-m_2)+2m_2v_{2}\cos(\theta_2-\varphi)}{m_1+m_2}\cos(\varphi)+v_{1}\sin(\theta_1-\varphi)\cos(\varphi + \tfrac{\pi}{2})
+\\[0.8em]
+v'_{1y} &= \frac{v_{1}\cos(\theta_1-\varphi)(m_1-m_2)+2m_2v_{2}\cos(\theta_2-\varphi)}{m_1+m_2}\sin(\varphi)+v_{1}\sin(\theta_1-\varphi)\sin(\varphi + \tfrac{\pi}{2}),
+\end{align}
+$
+
+$m$ is mass, $v$ and $\theta$ are velocity's direction and magnitude, $\varphi$ is the angle from object 1 to object 2  
+You calculate second object's velocity by swapping the subscript '1's with subscript '2's
+
+[[source](https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects)]
 
 ### Custom Force
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
-  - mass, velocity, bsize to detect collisions
+  - mass, velocity, and radius to detect collisions
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
   - nope
 
 - Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
-  - nuh-uh
+  - no
 
 - Does this force interact with other `Orbs`, or is it applied based on the environment?
   - it interacts with other orbs
 
 - In order to calculate this force, do you need to perform extra intermediary calculations? If so, what?
-  - the speeds after collision
-  - the angle of collision
+  - You need to get the magnitude and headings of the two orbs and the angle from one to the other
 
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
 
-one large fixed orb in the center with a bunch of mass and no velocity, and a bunch of orbs around it with some initial velocity so they move in circles
+For fun I want to have a two body system. I'll have two orbs with a huge amount of mass orbiting each other in the center and a handful of orbs orbiting around them.
+
+To get the velocity for circular orbits I'll solve for v in $\frac{GMm}{r_d^2} = \frac{mv^2}{r_o}$, where $r_d$ is the distance from the body/bodies that's pulling you towards the center and $r_o$ is the radius of your orbit
 
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+I want to have a horizontal chain of orbs with both ends fixed and a really heavy orb in the center. When running the heavy orb should pull the chain downwards, and then the chain should pull the heavy orb back up.
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+I want to have three different drag regions at the bottom and three orbs fall into each. The first orb will have more mass and the last orb will have a larger radius (I want to include cross-sectional area in my drag calculation). When running it should create an oblique line of orbs, or at least a sawtooth wave of them.
 
 ### Simulation 4: Custom force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+I'm planning to have three orbs, they'll start spread out with some initial velocity and bounce around the scene and on each other.
 
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+I'm thinking of having a fixed orb and a free orb connected via a spring, with maybe a third orb in the middle of them that can fly towards a fourth orb and do a little gravity turn(?). tbd
