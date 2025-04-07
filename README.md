@@ -81,4 +81,4 @@ I'm planning to have three orbs, they'll start spread out with some initial velo
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-I'm thinking of having a fixed orb and a free orb connected via a spring, with maybe a third orb in the middle of them that can fly towards a fourth orb and do a little gravity turn(?). tbd
+I'm going to try to make a double pendulum out of springs, along with a fixed orb on the right to attract things and a bunch of projectile orbs on the left to collide with the spring. When running there are going to be a bunch of collisions and some orbs floating towards each other

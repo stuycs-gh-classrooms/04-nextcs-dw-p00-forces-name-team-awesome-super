@@ -1,26 +1,36 @@
+// This class holds all the information for a physics simulation, including
+// the orbs in it, what forces are enabled, what constants are set to, and some time/physics controls
 class Scene {
 	List<Orb> orbs;
 	Set<PhysicsToggle> physicsToggles;
 	Map<SimulationConstant, Float> simulationConstants;
-	List<DragRegion> dragRegions;
-	float physicsTicksPerSecond;
+	List<DragRegion> dragRegions; // regions with a unique drag coefficient
+	float physicsTicksPerSecond; // how many physics updates will occur each second
+	float timeScale; // 1.0 for default speed, 0.5 for slow motion, 2 to speed things up, etc.
 
 	Scene() {
+		// init variables
 		orbs = new ArrayList<>();
 		physicsToggles = new HashSet<>();
 		simulationConstants = new EnumMap<>(SimulationConstant.class);
 		dragRegions = new ArrayList<>();
-		physicsTicksPerSecond = 2000;
+		physicsTicksPerSecond = 5000;
+		timeScale = 1.0;
 	}
 
+	// a convenience method to add orbs to the scene
 	void addOrbs(Orb... orbs) {
 		this.orbs.addAll(Arrays.asList(orbs));
 	}
 
+	// a convenience method to add drag regions to the scene
 	void addDragRegions(DragRegion... regions) {
 		dragRegions.addAll(Arrays.asList(regions));
 	}
 
+	// perform all physics for the scene
+	// `ticks` controls how many physics updates are run
+	// tickDuration is the deltatime used for each update
 	void physicsUpdate(int ticks, float tickDuration) {
 		for (int i = 0; i < ticks; i++) {
 			for (Orb orb : orbs) {
@@ -45,12 +55,15 @@ class Scene {
 	}
 
 	void drawOrbs() {
+		// call the draw method on every orb
 		for (Orb orb : orbs) {
 			orb.draw();
 		}
 	}
 
 	void drawSprings() {
+		// draws lines connecting each orb
+		// lines are colored green if the spring's compressed and red if it's stretched
 		strokeWeight(3);
 		for (Orb genericOrb : orbs) {
 			if (!(genericOrb instanceof LinkedListOrb)) continue;
@@ -67,11 +80,13 @@ class Scene {
 	}
 
 	void drawDragRegions() {
+		// call the draw method on every drag region
 		for (DragRegion region : dragRegions) {
 			region.draw();
 		}
 	}
 
+	// main method to draw the scene to the screen
 	void draw() {
 		background(255);
 		drawDragRegions();
